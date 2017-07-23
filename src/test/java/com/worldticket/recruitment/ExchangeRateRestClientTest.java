@@ -21,7 +21,11 @@ public class ExchangeRateRestClientTest {
     private static void createExchangeRate() {
         System.out.println("Testing create exchange rate API----------");
         RestTemplate restTemplate = new RestTemplate();
-        ExchangeRate exchangeRate = new ExchangeRate("AUD", "50", 26.35, 26.45);
+        ExchangeRate exchangeRate = new ExchangeRate();
+        exchangeRate.setCurrency("AUD");
+        exchangeRate.setDenomination("50");
+        exchangeRate.setBuying(26.35);
+        exchangeRate.setSelling(26.45);
         URI uri = restTemplate.postForLocation(REST_SERVICE_URI + "/exchangeRate/", exchangeRate, ExchangeRate.class);
         System.out.println("Location : " + uri.toASCIIString());
     }

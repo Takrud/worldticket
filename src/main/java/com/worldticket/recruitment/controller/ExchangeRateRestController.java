@@ -6,11 +6,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import javax.print.attribute.standard.Media;
 
 @RestController
 public class ExchangeRateRestController {
@@ -35,7 +33,7 @@ public class ExchangeRateRestController {
         exchangeRateService.saveExchangeRate(exchangeRate);
 
         HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuilder.path("/exchangeRate").buildAndExpand().toUri());
+        headers.setLocation(ucBuilder.path("/exchangeRate/{currency}").buildAndExpand(exchangeRate.getCurrency()).toUri());
         return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
     }
 

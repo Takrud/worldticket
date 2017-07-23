@@ -16,10 +16,7 @@ public class ExchangeRateServiceImpl implements ExchangeRateService {
     }
 
     public ExchangeRate findByCurrency(String currency) {
-        System.out.println("hello ");
         for (ExchangeRate exchangeRate : exchangeRates) {
-            System.out.println("hello1 " + exchangeRate.getCurrency());
-            System.out.println("hello2 " + currency);
             //if(exchangeRate.getCurrency() == currency && exchangeRate.getDenomination() >= denomination && exchangeRate.getDenomination()<=denomination){
             if (exchangeRate.getCurrency().equals(currency)) {
                 System.out.println("currency " + currency);
@@ -30,15 +27,38 @@ public class ExchangeRateServiceImpl implements ExchangeRateService {
     }
 
     public void saveExchangeRate(ExchangeRate exchangeRate) {
-        exchangeRates.add(new ExchangeRate(exchangeRate.getCurrency(), exchangeRate.getDenomination(), exchangeRate.getBuying(), exchangeRate.getSelling()));
+        ExchangeRate exchange = new ExchangeRate();
+        exchange.setCurrency(exchangeRate.getCurrency());
+        exchange.setDenomination(exchangeRate.getDenomination());
+        exchange.setBuying(exchangeRate.getBuying());
+        exchange.setSelling(exchangeRate.getSelling());
+
+        exchangeRates.add(exchange);
     }
 
     private static List<ExchangeRate> populateDummyRates() {
         List<ExchangeRate> exchangeRates = new ArrayList<ExchangeRate>();
-        exchangeRates.add(new ExchangeRate("USD", "100", 33.45, 33.45));
-        exchangeRates.add(new ExchangeRate("USD", "50", 33.30, 33.45));
-        exchangeRates.add(new ExchangeRate("JPY", "1000-100", 0.299, 0.30));
-        exchangeRates.add(new ExchangeRate("HKD", "1000-10", 4.27, 4.3));
+        ExchangeRate exchange = new ExchangeRate();
+        exchange.setCurrency("USD");
+        exchange.setDenomination("100");
+        exchange.setBuying(33.45);
+        exchange.setSelling(33.45);
+        exchangeRates.add(exchange);
+        exchange.setCurrency("USD");
+        exchange.setDenomination("50");
+        exchange.setBuying(33.30);
+        exchange.setSelling(33.45);
+        exchangeRates.add(exchange);
+        exchange.setCurrency("HKD");
+        exchange.setDenomination("1000-10");
+        exchange.setBuying(4.27);
+        exchange.setSelling(4.3);
+        exchangeRates.add(exchange);
+        exchange.setCurrency("JPY");
+        exchange.setDenomination("1000-100");
+        exchange.setBuying(0.299);
+        exchange.setSelling(0.30);
+        exchangeRates.add(exchange);
         return exchangeRates;
     }
 }

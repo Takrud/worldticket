@@ -8,12 +8,7 @@ public class ExchangeRate implements Serializable {
     private double buying;
     private double selling;
 
-    public ExchangeRate(String currency, String denomination, double buying, double selling) {
-        this.currency = currency;
-        this.denomination = denomination;
-        this.buying = buying;
-        this.selling = selling;
-    }
+
 
     public String getCurrency() {
         return currency;
@@ -46,5 +41,4 @@ public class ExchangeRate implements Serializable {
     public void setSelling(double selling) {
         this.selling = selling;
     }
-
 }
