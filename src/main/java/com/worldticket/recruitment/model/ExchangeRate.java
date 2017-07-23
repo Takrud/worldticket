@@ -1,10 +1,19 @@
 package com.worldticket.recruitment.model;
 
-public class ExchangeRate {
+import java.io.Serializable;
+
+public class ExchangeRate implements Serializable {
     private String currency;
-    private int denomination;
+    private String denomination;
     private double buying;
     private double selling;
+
+    public ExchangeRate(String currency, String denomination, double buying, double selling) {
+        this.currency = currency;
+        this.denomination = denomination;
+        this.buying = buying;
+        this.selling = selling;
+    }
 
     public String getCurrency() {
         return currency;
@@ -14,11 +23,11 @@ public class ExchangeRate {
         this.currency = currency;
     }
 
-    public int getDenomination() {
+    public String getDenomination() {
         return denomination;
     }
 
-    public void setDenomination(int denomination) {
+    public void setDenomination(String denomination) {
         this.denomination = denomination;
     }
 
@@ -37,4 +46,5 @@ public class ExchangeRate {
     public void setSelling(double selling) {
         this.selling = selling;
     }
+
 }

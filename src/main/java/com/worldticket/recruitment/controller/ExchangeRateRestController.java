@@ -10,12 +10,14 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.print.attribute.standard.Media;
+
 @RestController
 public class ExchangeRateRestController {
     @Autowired
     ExchangeRateService exchangeRateService;
 
-    @RequestMapping(value = "/exchangeRate/{currency}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/exchangeRate/{currency}", method = RequestMethod.GET)
     public ResponseEntity<ExchangeRate> getExchangeRate(@PathVariable("currency") String currency) {
         System.out.println("Fetching Exchange Rate with currency code " + currency);
         ExchangeRate exchangeRate = exchangeRateService.findByCurrency(currency);
@@ -33,7 +35,7 @@ public class ExchangeRateRestController {
         exchangeRateService.saveExchangeRate(exchangeRate);
 
         HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuilder.path("/exchangeRate/{currency}").buildAndExpand(exchangeRate.getCurrency()).toUri());
+        headers.setLocation(ucBuilder.path("/exchangeRate").buildAndExpand().toUri());
         return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
     }
 
